@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>UNIST</title>
+</head>
+
+<body>
+  <div class="container">
+    <div style="text-align: center; margin-top: 100px;">
+      <h1> UNIST: Unpaired Neural Implicit Shape Translation Network </h1>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://qiminchen.github.io/">Qimin Chen<sup>1</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="">Johannes Merz<sup>1</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="">Aditya Sanghi<sup>2</sup></a> </span>
+      </div>
+      <div>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="">Hooman Shayani<sup>2</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://www.sfu.ca/~amahdavi/Home.html">Ali Mahdavi-Amiri<sup>1</sup></a> </span>
+        <span style="font-size: 1.3em;"><a href="https://www.cs.sfu.ca/~haoz/">Hao Zhang<sup>1</sup></a> </span>
+      </div>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>1</sup>Simon Fraser University</span>
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>2</sup>Autodesk AI Lab</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 15px; text-align: center;">
+      <span style="margin-right: 15px; font-size: 1.3em;">
+        <a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Chen_UNIST_Unpaired_Neural_Implicit_Shape_Translation_Network_CVPR_2022_paper.pdf">
+          [Paper (CVPR 2022)]</a>
+        <a href="https://openaccess.thecvf.com/content/CVPR2022/supplemental/Chen_UNIST_Unpaired_Neural_CVPR_2022_supplemental.pdf">[Supplementary]</a>
+        <a href="data/UNIST_poster.pdf">[Poster]</a> <a href="https://github.com/qiminchen/UNIST">[Code]</a>
+        <a href="https://youtu.be/FOfMNhDYA84" target="_blank">[Video]</a> </span>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <div class="text-center">
+        <img src="images/teaser.svg" width=100% class="img-fluid">
+      </div>
+      <div style="margin-top: 35px;">
+        <p>
+           UNIST is able to learn both style-preserving content alteration(a-d) and content-preserving style transfer(e-i) between
+          two unpaired domains of shapes.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h3 class="text-center">
+        - Abstract -
+      </h3>
+      <p style="font-style: italic; margin-bottom: 5px;">
+        We introduce UNIST, the first deep neural implicit model for general-purpose, unpaired shape-to-shape translation,
+        in both 2D and 3D domains. Our model is built on autoencoding implicit fields, rather than point clouds which represents
+        the state of the art. Furthermore, our translation network is trained to perform the task over a latent grid representation
+        which combines the merits of both latent-space processing and position awareness, to not only enable drastic shape transforms
+        but also well preserve spatial features and fine local details for natural shape translations. With the same network architecture
+        and only dictated by the input domain pairs, our model can learn both style-preserving content alteration and content-preserving
+        style transfer. We demonstrate the generality and quality of the translation results, and compare them to well-known baselines.
+      </p>
+    </div>
+
+      <div style="margin-top: 50px;">
+        <h3 class="text-center">
+            - Video -
+        </h3>
+        <div class="text-center">
+            <div style="position:relative;padding-top:56.25%;">
+                <iframe src="https://www.youtube.com/embed/FOfMNhDYA84" allowfullscreen="" style="position:absolute;top:0;left:0;
+                width:100%;height:100%; border: 0"></iframe>
+            </div>
+        </div>
+      </div>
+
+    <div style="margin-top: 50px;">
+      <h3 class="text-center">
+        - Method -
+      </h3>
+      <div class="text-center">
+        <img src="images/network.svg" width=100% class="img-fluid">
+      </div>
+      <div style="margin-top: 35px;">
+        <p>
+           Overview of our framework for unpaired neural implicit shape-to-shape translation, which consists of two separately
+          trained networks. The autoencoding network (top) learns to encode and decode binary voxel occupancies for shapes from
+          both the source and target domains, where the encoder maps an input shape to a latent grid representation \(\mathcal{Z}\).
+          In the 2D case, the latent feature at any query point \(p\) is obtained via bilinear interpolation over the latent codes stored
+          in \(\mathcal{Z}\). The translation network (bottom) employs the pre-trained autoencoder network above to transform the
+          translation problem into a latent space. In that space, a generator learns to: (1) translate source-domain codes
+          \(\mathcal{Z}_{\chi_{1}}\) into target-domain codes \(\mathcal{Z}_{\chi_{1\rightarrow 2}}\). (2) preserve target-domain codes,
+          from \(\mathcal{Z}_{\chi_{2}}\) to \(\mathcal{Z}_{\chi_{2\rightarrow 2}}\). \(\mathcal{Z}_{\chi_{1\rightarrow 2}}\) is passed
+          to the pre-trained implicit decoder to obtain the final target shape resulting from the generator network.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px">
+      <h3 class="text-center">
+        - Results -
+      </h3>
+      <h4>Latent Grid Interpolation (<strong style="color: rgb(0, 0, 0)">regular encoding</strong> vs. <strong style="color: rgb(0, 0, 0)">
+        position-aware encoding</strong>)</h4>
+      <p>UNIST with <strong style="color: rgb(144, 144, 255)">regular encoding</strong> generates compact translated shapes during interpolation as per
+        inherent nature of implicit representation. <br> UNIST with <strong style="color: rgb(0, 0, 0)">position-aware encoding</strong> further preserves
+        spatial features and fine local details for natural and well-behaved translations.
+      </p>
+        <div style="margin-top: 35px; overflow:hidden;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(A \rightarrow H \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(H \rightarrow A \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/A2H_160_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/A2H_160.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/A2H_215_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/A2H_215.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/H2A_160_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/H2A_160.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/H2A_1730_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/H2A_1730.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px; overflow:hidden;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(G \rightarrow R \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(R \rightarrow G \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/G2R_33_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/G2R_33.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/G2R_1221_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/G2R_1221.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/R2G_303_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/R2G_303.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/R2G_3851_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/R2G_3851.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(M \rightarrow N \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(N \rightarrow M \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/M2N_189_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/M2N_189.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/M2N_293_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/M2N_293.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/N2M_7296_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/N2M_7296.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/N2M_7414_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/N2M_7414.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(Solid \rightarrow Dotted \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(Dotted \rightarrow Solid \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/solid2dotted_A1374_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/solid2dotted_A1374.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/solid2dotted_H4097_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/solid2dotted_H4097.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/dotted2solid_A1378_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/dotted2solid_A1378.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/dotted2solid_H5415_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/dotted2solid_H5415.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(Regular \rightarrow Italic \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(Italic \rightarrow Regular \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/reg2it_A89_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/reg2it_A89.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/reg2it_H7380_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/reg2it_H7380.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/it2reg_A414_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/it2reg_A414.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/it2reg_H7374_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/it2reg_H7374.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(Regular \rightarrow Bold \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(Bold \rightarrow Regular \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/reg2bold_G717_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/reg2bold_G717.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/reg2bold_R6145_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/reg2bold_R6145.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/bold2reg_G4303_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/bold2reg_G4303.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/bold2reg_R7212_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/bold2reg_R7212.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(Sharp \rightarrow Smooth \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(Smooth \rightarrow Sharp \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/sharp2round_A1201_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/sharp2round_A1201.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/sharp2round_H1922_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/sharp2round_H1922.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/round2sharp_A404_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/round2sharp_A404.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/round2sharp_H7069_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/round2sharp_H7069.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 50px;">
+          <p>UNIST with <strong style="color: rgb(144, 144, 255); text-shadow: 2px 2px 5px gray;">regular encoding</strong> generates compact translated
+            shapes during interpolation as per inherent nature of implicit representation. <br>
+            UNIST with <strong style="color: rgb(254, 250, 185); text-shadow: 2px 2px 5px black;">position-aware encoding</strong> further preserves
+            spatial features and fine local details for natural and well-behaved translations.
+          </p>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(Chair \rightarrow Table \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(Table \rightarrow Chair \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/chair2table_1_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/chair2table_1.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/chair2table_2_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/chair2table_2.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/table2chair_1_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/table2chair_1.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/table2chair_2_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/table2chair_2.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(w \, Armrest \rightarrow w/o \, Armrest \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(w/o \, Armrest \rightarrow w \, Armrest \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/arm2armless_1_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/arm2armless_1.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/arm2armless_2_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/arm2armless_2.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/armless2arm_1_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/armless2arm_1.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/armless2arm_2_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/armless2arm_2.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+        <p style="text-align: left; width:52%; display: inline-block;"> \(Tall \rightarrow Short \) </p>
+        <p style="text-align: left; width:47%;  display: inline-block;"> \(Short \rightarrow Tall \) </p>
+          <div class="text-center" style="overflow:hidden;">
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/tall2short_1_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/tall2short_1.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left">
+              <img src="images/tall2short_2_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/tall2short_2.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; overflow:hidden;">
+              <img src="images/short2tall_1_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/short2tall_1.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+            <div class="text-center" style="width: 25%; display: inline-block; float: left; background-color: lightgray; overflow:hidden;">
+              <img src="images/short2tall_2_reg.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+              <img src="images/short2tall_2.gif" width=50% class="img-fluid" style="display: inline-block; float: left">
+            </div>
+          </div>
+        </div>
+
+      <h4>2D Comparison</h4>
+      <p>UNIST is capable of producing shapes with significantly better visual quality as it reproduces small stylistic features as well as preserves
+        topological features. </p>
+      <div class="text-center">
+        <img src="images/2d_pos_logan_cyclegan_ganhopper.svg" width=100% class="img-fluid">
+      </div>
+
+      <br>
+      <br>
+
+      <h4>3D Comparison</h4>
+      <p>UNIST produces more compact translated shapes with better preservation of spatial features and details in both mesh and point cloud
+        representations. </p>
+      <div class="text-center">
+        <img src="images/3d_pos_logan.svg" width=100% class="img-fluid">
+      </div>
+    </div>
+
+    <div style="margin-top: 50px; margin-bottom: 30px;">
+      <h3 class="text-center">
+        - Citation -
+      </h3>
+      <div style="margin-top: 35px;">
+        <pre><code>
+          @inproceedings{chen2022unist,
+            title={UNIST: Unpaired Neural Implicit Shape Translation Network},
+            author={Chen, Qimin and Merz, Johannes and Sanghi, Aditya and Shayani, Hooman and Mahdavi-Amiri, Ali and Zhang, Hao},
+            booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+            year={2022}
+          }
+        </code></pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

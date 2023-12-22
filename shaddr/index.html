@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>ShaDDR</title>
+</head>
+
+<body>
+  <div class="container">
+    <div style="text-align: center; margin-top: 100px;">
+      <h2> ShaDDR: Interactive Example-Based Geometry and Texture Generation via 3D Shape Detailization and Differentiable Rendering </h2>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://qiminchen.github.io/">Qimin Chen<sup>1</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://czq142857.github.io/">Zhiqin Chen<sup>1</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="http://home.ustc.edu.cn/~zh2991/">Hang Zhou<sup>1</sup></a> </span>
+        <span style="font-size: 1.3em;"><a href="https://www.cs.sfu.ca/~haoz/">Hao Zhang<sup>1,2</sup></a> </span>
+      </div>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>1</sup>Simon Fraser University</span>
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>2</sup>Amazon</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 15px; text-align: center;">
+      <span style="margin-right: 15px; font-size: 1.3em;">
+        <a href="">
+          [Paper (SIGGRAPH Asia 2023 Conference)]</a>
+        <a href="">[Supplementary]</a>
+        <a href="">[Poster]</a>
+        <a href="https://github.com/qiminchen/ShaDDR">[Code]</a>
+        <a href="" target="_blank">[Video]</a> </span>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <div class="text-center">
+        <img src="images/teaser.svg" width=100% class="img-fluid">
+      </div>
+      <div style="margin-top: 35px;">
+        <p>
+           Given a coarse voxel shape and a textured exemplar shape (top row), our network generates a geometrically
+          detailized and textured version of the coarse shape (bottom row) in less than 1 second, with geometry and
+          texture generations both conditioned on the exemplar. See zoom-ins for some details.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h3 class="text-center">
+        - Abstract -
+      </h3>
+      <p style="font-style: italic; margin-bottom: 5px;">
+        We present ShaDDR, an example-based deep generative neural network which produces a high-resolution textured
+        3D shape through geometry detailization and conditional texture generation applied to an input coarse voxel shape.
+        Trained on a small set of detailed and textured exemplar shapes, our method learns to detailize the geometry via
+        multi-resolution voxel upsampling and generate textures on voxel surfaces via differentiable rendering against
+        exemplar texture images from a few views. The generation is real-time, taking less than 1 second to produce a
+        3D model with voxel resolutions up to 512<sup>3</sup>. The generated shape preserves the overall structure of the
+        input coarse voxel model, while the style of the generated geometric details and textures can be manipulated through
+        learned latent codes. In the experiments, we show that our method can generate higher-resolution shapes with
+        plausible and improved geometric details and clean textures compared to prior works. Furthermore, we showcase
+        the ability of our method to learn geometric details and textures from shapes reconstructed from real-world photos.
+        In addition, we have developed an interactive modeling application to demonstrate the generalizability of
+        our method to various user inputs and the controllability it offers, allowing users to interactively sculpt
+        a coarse voxel shape to define the overall structure of the detailized 3D shape.
+      </p>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <h3 class="text-center">
+        - Method -
+      </h3>
+      <div class="text-center">
+        <img src="images/pipeline.png" width=100% class="img-fluid">
+      </div>
+      <div style="margin-top: 10px;">
+        <p>
+          An overview of our ShaDDR’s two-phase solution pipeline and network architecture, for which the input
+          “style shape” provides the exemplars for both detailed geometry and multi-view textures. Conditioned on the
+          geometry code, the geometry generator upsamples a coarse input voxel grid into detailed geometries
+          in multiple (two) resolutions, \((K/2)^3\) and \(K^3\). The geometry discriminators enforce the
+          local patches of the upsampled geometries to be plausible with respect to the target geometry style. The texture
+          generator takes in the texture code and the same coarse voxels and synthesizes 3D volumetric textures for
+          the upsampled geometry. The generated geometry and textures are rendered into 2D images from different views,
+          and the texture discriminators enforce the local patches of the rendered images to be plausible with respect to
+          the target texture style.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px">
+      <h3 class="text-center">
+        - Results -
+      </h3>
+      <p>
+        For each row, we show coarse content voxel, style shape, geometry detailization and geometry with texture. Please refresh the page if GIFs are not synced.
+      </p>
+      <div style="margin-top: 35px; overflow:hidden;">
+        <img src="images/car/coarse.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/car/style.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/car/test_geometry.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/car/test.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+      </div>
+
+      <div style="margin-top: 35px; overflow:hidden;">
+        <img src="images/chair/coarse.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/chair/style.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/chair/test_geometry.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/chair/test.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+      </div>
+
+      <div style="margin-top: 35px; overflow:hidden;">
+        <img src="images/plane/coarse.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/plane/style.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/plane/test_geometry.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/plane/test.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+      </div>
+
+      <div style="margin-top: 35px; overflow:hidden;">
+        <img src="images/plant/coarse.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/plant/style.png" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/plant/test_geometry.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+        <img src="images/plant/test.gif" width=25% class="img-fluid" style="display: inline-block; float: left">
+      </div>
+    </div>
+
+    <div style="margin-top: 50px; margin-bottom: 30px;">
+      <h3 class="text-center">
+        - Citation -
+      </h3>
+      <div style="margin-top: 35px;">
+        <pre><code>
+          TBA
+        </code></pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
