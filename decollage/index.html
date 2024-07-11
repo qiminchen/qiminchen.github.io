@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>ShaDDR</title>
+</head>
+
+<body>
+  <div class="container">
+    <div style="text-align: center; margin-top: 100px;">
+      <h2> DECOLLAGE: 3D Detailization by Controllable, Localized, and Learned Geometry Enhancement </h2>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://qiminchen.github.io/">Qimin Chen<sup>1, 2</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://czq142857.github.io/">Zhiqin Chen<sup>2</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="http://www.vovakim.com/">Vladimir G. Kim<sup>2</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://noamaig.github.io/">Noam Aigerman<sup>3</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://www.cs.sfu.ca/~haoz/">Hao Zhang<sup>1</sup></a> </span>
+        <span style="font-size: 1.3em;"><a href="https://www.cse.iitb.ac.in/~sidch/">Siddhartha Chaudhuri<sup>2</sup></a> </span>
+      </div>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>1</sup>Simon Fraser University</span>
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>2</sup>Amazon</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 15px; text-align: center;">
+      <span style="margin-right: 15px; font-size: 1.3em;">
+        <a href="">
+          [Paper (ECCV 2024]</a>
+        <a href="">[Supplementary (coming)]</a>
+        <a href="">[Poster (coming)]</a>
+        <a href="">[Code (coming)]</a>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h3 class="text-center">
+        - Abstract -
+      </h3>
+      <p style="font-style: italic; margin-bottom: 5px;">
+            We present a 3D modeling method which enables end-users to refine or detailize 3D shapes using machine learning, 
+            expanding the capabilities of AI-assisted 3D content creation. Given a coarse voxel shape (e.g., one produced with 
+            a simple box extrusion tool or via generative modeling), a user can directly “paint” desired target styles 
+            representing compelling geometric details, from input exemplar shapes, over different regions of the coarse shape. 
+            These regions are then up-sampled into high-resolution geometries which adhere with the painted styles.
+            To achieve such controllable and localized 3D detailization, we build on top of a Pyramid GAN by making it 
+            masking-aware. We devise novel structural losses and priors to ensure that our method preserves both
+            desired coarse structures and fine-grained features even if the painted styles are borrowed from diverse sources, 
+            e.g., different semantic parts and even different shape categories. Through extensive experiments, we
+            show that our ability to localize details enables novel interactive creative workflows and applications. 
+            Our experiments further demonstrate that in comparison to prior techniques built on global detailization, our method
+            generates structure-preserving, high-resolution stylized geometries with more coherent shape details and style transitions.
+      </p>
+    </div>
+
+    <div style="margin-top: 50px; margin-bottom: 30px;">
+      <h3 class="text-center">
+        - Citation -
+      </h3>
+      <div style="margin-top: 35px;">
+        <pre><code>
+          TBA
+        </code></pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
