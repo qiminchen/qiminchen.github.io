@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <title>ShaDDR</title>
+  <title>DECOLLAGE</title>
 </head>
 
 <body>
@@ -78,6 +78,25 @@
             Our experiments further demonstrate that in comparison to prior techniques built on global detailization, our method
             generates structure-preserving, high-resolution stylized geometries with more coherent shape details and style transitions.
       </p>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <h3 class="text-center">
+        - Method -
+      </h3>
+      <div class="text-center">
+        <img src="images/pipeline.png" width=100% class="img-fluid">
+      </div>
+      <div style="margin-top: 10px;">
+        <p>
+          Network architecture. Conditioned on a set of style codes associated with each segmented part, 
+          the network upsamples the coarse content voxel with part labels into detailed geometries in 
+          multiple resolutions. For each upsampling level \(j\), the discriminator enforces the local patches 
+          of each part in the upsampled geometry to be plausible with respect to the styles they are conditioned on.
+          The structure-preserving losses \(\mathcal{L}_{down}^{j}\) and \(\mathcal{L}_{up}^{j}\) enforce 
+          the structure of the output to be consistent with the input.
+        </p>
+      </div>
     </div>
 
     <div style="margin-top: 50px; margin-bottom: 30px;">
