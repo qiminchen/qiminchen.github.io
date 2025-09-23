@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>ART-DECO</title>
+</head>
+
+<body>
+  <div class="container">
+    <div style="text-align: center; margin-top: 100px;">
+      <h2> ART-DECO: Arbitrary Text Guidance for 3D Detailizer Construction </h2>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://qiminchen.github.io/">Qimin Chen<sup>1</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://yyuezhi.github.io/">Yuezhi Yang<sup>2</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://yifita.netlify.app/">Wang Yifan<sup>3</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="http://www.vovakim.com/">Vladimir G. Kim<sup>3</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://www.cse.iitb.ac.in/~sidch/">Siddhartha Chaudhuri<sup>3</sup></a> </span>
+        <span style="font-size: 1.3em;"><a href="https://www.cs.sfu.ca/~haoz/">Hao Zhang<sup>1</sup></a> </span>
+        <span style="margin-right: 15px; font-size: 1.3em;"><a href="https://czq142857.github.io/">Zhiqin Chen<sup>3</sup></a> </span>
+      </div>
+      <div style="margin-top: 15px;">
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>1</sup>Simon Fraser University</span>
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>2</sup>The University of Texas at Austin</span>
+        <span style="margin-right: 20px; font-size: 1.2em;"><sup>3</sup>Adobe Research</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 15px; text-align: center;">
+      <span style="margin-right: 15px; font-size: 1.3em;">
+        <a href="https://arxiv.org/abs/2505.20431">
+          [Paper (SIGGRAPH Asia 2025 Conference)]</a>
+        <a href="">[Code (Coming soon)]</a>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <div class="text-center">
+        <img src="" width=100% class="img-fluid">
+      </div>
+      <div style="margin-top: 35px;">
+        <p>
+           TBC.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h3 class="text-center">
+        - Abstract -
+      </h3>
+      <p style="font-style: italic; margin-bottom: 5px;">
+        We introduce a 3D detailizer, a neural model which can instantaneously (in <1s) transform a coarse 3D shape proxy 
+        into a high-quality asset with detailed geometry and texture as guided by an input text prompt. Our model is trained 
+        using the text prompt, which defines the shape class and characterizes the appearance and fine-grained style of the 
+        generated details. The coarse 3D proxy, which can be easily varied and adjusted (e.g., via user editing), provides 
+        structure control over the final shape. Importantly, our detailizer is not optimized for a single shape; it is the 
+        result of distilling a generative model, so that it can be reused, without retraining, to generate any number of shapes, 
+        with varied structures, whose local details all share a consistent style and appearance. Our detailizer training utilizes 
+        a pretrained multi-view image diffusion model, with text conditioning, to distill the foundational knowledge therein 
+        into our detailizer via Score Distillation Sampling (SDS). To improve SDS and enable our detailizer architecture to 
+        learn generalizable features over complex structures, we train our model in two training stages to generate shapes 
+        with increasing structural complexity. Through extensive experiments, we show that our method generates shapes of 
+        superior quality and details compared to existing text-to-3D models under varied structure control. Our detailizer 
+        can refine a coarse shape in less than a second, making it possible to interactively author and adjust 3D shapes. 
+        Furthermore, the user-imposed structure control can lead to creative, and hence out-of-distribution, 3D asset generations 
+        that are beyond the current capabilities of leading text-to-3D generative models. We demonstrate an interactive 3D modeling 
+        workflow our method enables, and its strong generalizability over styles, structures, and object categories.
+      </p>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <h3 class="text-center">
+        - Method -
+      </h3>
+      <div class="text-center">
+        <img src="" width=100% class="img-fluid">
+      </div>
+      <div style="margin-top: 10px;">
+        <p>
+          TBC.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px">
+      <h3 class="text-center">
+        - Results -
+      </h3>
+      <p>
+        TBC.
+      </p>
+      
+    </div>
+
+    <div style="margin-top: 50px; margin-bottom: 30px;">
+      <h3 class="text-center">
+        - Citation -
+      </h3>
+      <div style="margin-top: 35px;">
+        <pre><code>
+          @inproceedings{chen2025artdeco,
+          author = {Chen, Qimin and Yang, Yuezhi and Wang, Yifan and Kim, Vladimir G. and Chaudhuri, Siddhartha and Zhang, Hao and Chen, Zhiqin},
+          title = {ART-DECO: Arbitrary Text Guidance for 3D Detailizer Construction},
+          year = {2025},
+          booktitle = {SIGGRAPH Asia 2025 Conference Papers},
+          }
+        </code></pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
