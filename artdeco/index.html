@@ -86,11 +86,15 @@
         - Method -
       </h3>
       <div class="text-center">
-        <img src="" width=100% class="img-fluid">
+        <img src="method.png" width=100% class="img-fluid">
       </div>
       <div style="margin-top: 10px;">
         <p>
-          TBC.
+          Overview of the training of our detailizer. Given a coarse voxel grid and a text prompt that describes a style, two 3D convolutional networks upsample 
+          the coarse voxels into high-resolution density and albedo fields, respectively. Multi-view images are then rendered from the density and albedo fields, and a
+          pretrained multi-view diffusion model conditioned on the text prompt is used as a prior for Score Distillation Sampling \(\mathcal{L}_{SDS}\). 
+          The regularization loss \(\mathcal{L}_{reg}\) measures the similarity between the masks rendered from the generated shape and those from the input coarse 
+          voxel grid, thus enforcing the structure of the generated shape to be consistent with the input coarse voxels.
         </p>
       </div>
     </div>
