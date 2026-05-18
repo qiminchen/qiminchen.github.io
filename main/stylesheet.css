@@ -1,3 +1,26 @@
+/* Linux Biolinum (self-hosted) */
+@font-face {
+  font-family: 'Linux Biolinum';
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/linux-biolinum.regular.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Linux Biolinum';
+  font-style: normal;
+  font-weight: 700;
+  src: url('font/linux-biolinum.bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Linux Biolinum';
+  font-style: italic;
+  font-weight: 400;
+  src: url('font/linux-biolinum.italic.woff2') format('woff2');
+  font-display: swap;
+}
+
 /* latin-ext */
 @font-face {
   font-family: 'Lato';
@@ -80,28 +103,28 @@ th,
 tr,
 p,
 a {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-family: 'Linux Biolinum', 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px
 }
 
 strong {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-family: 'Linux Biolinum', 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px;
 }
 
 heading {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-family: 'Linux Biolinum', 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 22px;
 }
 
 papertitle {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-family: 'Linux Biolinum', 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 700
 }
 
 name {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-family: 'Linux Biolinum', 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 32px;
 }
 
