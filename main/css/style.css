@@ -1,3 +1,64 @@
+/* Section layout tables */
+.sec-table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: separate;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Timeline tables (Experience, Teaching, Services) */
+.timeline-table {
+    width: calc(100% + 80px);
+    border: 0;
+    border-spacing: 0;
+    border-collapse: separate;
+    margin-right: auto;
+    margin-left: -80px;
+    table-layout: fixed;
+}
+
+/* Section heading cells */
+.sec-heading-td {
+    padding: 10px 10px 10px 20px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+/* Paper layout cells */
+.paper-img {
+    padding: 20px 0 20px 20px;
+    width: 35%;
+    vertical-align: middle;
+}
+
+.paper-desc {
+    padding: 15px 5px;
+    width: 75%;
+    vertical-align: middle;
+}
+
+/* Timeline cells */
+.tl-year {
+    padding: 4px 3px;
+    width: 80px;
+    vertical-align: middle;
+    white-space: nowrap;
+    color: #888;
+    text-align: right;
+    font-size: 11px;
+}
+
+.tl-content {
+    padding: 4px 10px 4px 20px;
+    vertical-align: top;
+}
+
+td img {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .paper > pre {
     width: 560px;
     overflow: auto;
